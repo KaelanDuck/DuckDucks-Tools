@@ -1,0 +1,20 @@
+{
+    "name": "VRCFury-Extensions",
+    "references": [
+        "GUID:5a5a85170ae74fe7b1fbc680b36b7122",
+        "GUID:3a48074f337050d4c987242d92d466b6",
+        "GUID:21332e1f0d937794d916d2402ba1943a",
+        "GUID:6e9c6119ac4eb334284fb7b4bc6d1f05"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
