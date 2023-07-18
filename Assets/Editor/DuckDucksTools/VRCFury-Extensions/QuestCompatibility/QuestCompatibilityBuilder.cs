@@ -169,7 +169,7 @@ namespace VF.Feature {
 
             // check for any physbones that aren't network id'd
             var networkIDCollection = featureBaseObject.GetComponent<VRCAvatarDescriptor>().NetworkIDCollection;
-            var nonNetworkedPhysbones = featureBaseObject.GetComponentsInChildren<VRCPhysBone>(true)
+            var nonNetworkedPhysbones = featureBaseObject.GetComponentsInSelfAndChildren<VRCPhysBone>()
                 .Where(x => !networkIDCollection.Any(y => y.gameObject == x.gameObject));
             
             // warn if any physbones have no network id
@@ -406,7 +406,7 @@ namespace VF.Feature {
         #endregion
 
         #region Apply
-        [FeatureBuilderAction(FeatureOrder.ApplyToggleRestingState + 2)]
+        [FeatureBuilderAction(FeatureOrder.BlendshapeOptimizer - 1)]
         public void Apply() {
             // on non-pc build platform, do nothing
             if (EditorUserBuildSettings.activeBuildTarget != BuildTarget.Android && !model.debug_runAlways) {

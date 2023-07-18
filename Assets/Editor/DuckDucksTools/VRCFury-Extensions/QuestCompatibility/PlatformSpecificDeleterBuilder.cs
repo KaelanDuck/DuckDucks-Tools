@@ -67,7 +67,7 @@ namespace VF.Feature {
         }
 
         // run after any defaults capture
-        [FeatureBuilderAction(FeatureOrder.ApplyToggleRestingState + 1)]
+        [FeatureBuilderAction(FeatureOrder.BlendshapeOptimizer - 2)]
         public void Apply() {
             bool isQuestBuild = (EditorUserBuildSettings.activeBuildTarget == BuildTarget.Android);
             bool isDesktopBuild = !isQuestBuild;

@@ -127,7 +127,7 @@ namespace VF.Feature {
                 }));
             }
 
-            List<GameObject> SMRAndParents = avatarObject.GetComponentsInChildren<Transform>(true)
+            List<GameObject> SMRAndParents = avatarObject.GetComponentsInSelfAndChildren<Transform>()
                 .Intersect(smr.GetComponentsInParent<Transform>(true))
                 .Select(t => t.gameObject)
                 .Append(smr.gameObject)
@@ -520,7 +520,7 @@ namespace VF.Feature {
             smrBaseValuesCompatibleCache.Clear();
             relevantAnimationClips = null;
 
-            var allSMRs = avatarObject.GetComponentsInChildren<SkinnedMeshRenderer>(true).ToList();
+            var allSMRs = avatarObject.GetComponentsInSelfAndChildren<SkinnedMeshRenderer>().ToList();
 
             // exclude any SMRs that are children of an animator (except the root animator)
             // this is because we can't yet merge SMRs that are children of an animator
