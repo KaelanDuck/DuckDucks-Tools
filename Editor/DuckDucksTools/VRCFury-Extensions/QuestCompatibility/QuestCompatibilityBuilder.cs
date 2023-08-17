@@ -778,7 +778,7 @@ namespace VF.Feature {
                 .ToList();
             
             // make a copy of the mesh
-            Mesh newMesh = mutableManager.MakeMutable(inputMesh); //Object.Instantiate(inputMesh);
+            Mesh newMesh = mutableManager.MakeMutable(inputMesh, true); //Object.Instantiate(inputMesh);
 
             // copy through indices for all non-null slots
             // and add entries to the remapSlots dictionary
@@ -926,7 +926,7 @@ namespace VF.Feature {
             // if the mesh doesn't have vertex Colors, we don't need to do anything
             if (input.colors.Length == 0) return input;
             // make a copy of the mesh
-            Mesh output = mutableManager.MakeMutable(input);
+            Mesh output = mutableManager.MakeMutable(input, true);
             // remove the vertex colours
             output.colors = new Color[] {};
             VRCFuryEditorUtils.MarkDirty(output);
