@@ -778,7 +778,7 @@ namespace VF.Feature {
                 .ToList();
             
             // make a copy of the mesh
-            Mesh newMesh = mutableManager.MakeMutable(inputMesh, true); //Object.Instantiate(inputMesh);
+            Mesh newMesh = mutableManager.MakeMutable(inputMesh, renderer.gameObject); //Object.Instantiate(inputMesh);
 
             // copy through indices for all non-null slots
             // and add entries to the remapSlots dictionary
@@ -919,14 +919,14 @@ namespace VF.Feature {
         // avoid duplicating meshes when multiple renderers share the same mesh
         private Dictionary<Mesh, Mesh> meshCache = new Dictionary<Mesh, Mesh>();
 
-        private Mesh RemoveVertexColorsFromMesh(Mesh input) {
+        private Mesh RemoveVertexColorsFromMesh(Mesh input, GameObject owner) {
             if (input == null) return null;
             // check we haven't already processed this mesh
             if (meshCache.ContainsKey(input)) return meshCache[input];
             // if the mesh doesn't have vertex Colors, we don't need to do anything
             if (input.colors.Length == 0) return input;
             // make a copy of the mesh
-            Mesh output = mutableManager.MakeMutable(input, true);
+            Mesh output = mutableManager.MakeMutable(input, owner);
             // remove the vertex colours
             output.colors = new Color[] {};
             VRCFuryEditorUtils.MarkDirty(output);
@@ -942,8 +942,8 @@ namespace VF.Feature {
 
             foreach (var renderer in renderers) {
                 // process the mesh through RemoveVertexColors 
-                if (renderer is SkinnedMeshRenderer smr) smr.sharedMesh = RemoveVertexColorsFromMesh(smr.sharedMesh);
-                else if (renderer is MeshRenderer mr) mr.GetComponent<MeshFilter>().sharedMesh = RemoveVertexColorsFromMesh(mr.GetComponent<MeshFilter>().sharedMesh);
+                if (renderer is SkinnedMeshRenderer smr) smr.sharedMesh = RemoveVertexColorsFromMesh(smr.sharedMesh, renderer.gameObject);
+                else if (renderer is MeshRenderer mr) mr.GetComponent<MeshFilter>().sharedMesh = RemoveVertexColorsFromMesh(mr.GetComponent<MeshFilter>().sharedMesh, renderer.gameObject);
             }
         }
         #endregion

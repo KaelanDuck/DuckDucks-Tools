@@ -265,7 +265,7 @@ namespace VF.Feature {
             #endregion
 
             // don't touch the original mesh
-            mesh = mutableManager.MakeMutable(mesh, true);
+            mesh = mutableManager.MakeMutable(mesh, model.target.gameObject);
 
             // list to put new indices in when we determine that
             // a specific tri needs to stay
